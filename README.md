@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RTM API Client</title>
-  </head>
+
   <body>
-    <h1>RTM API Client</h1>
+    <h1>RTM BILL API </h1>
     <p>
       This is a Python script that demonstrates how to use the RTM API to authenticate a user and retrieve a list of their bills. The RTM API is a REST API that allows you to access information about a user's account and perform actions on their behalf.
     </p>
@@ -24,7 +20,7 @@
         An RTM account with a valid email and password. You can sign up for an RTM account at <a href="https://www.rtm.fr/">https://www.rtm.fr/</a>.
       </li>
       <li>
-        A <        <li><code>EMAIL_RTM</code>: the email address of the user's RTM account</li>
+       <li><code>EMAIL_RTM</code>: the email address of the user's RTM account</li>
         <li><code>PASSWORD_RTM</code>: the password of the user's RTM account</li>
       </ul>
       The <code>.env</code> file should be placed in the same directory as the script.
