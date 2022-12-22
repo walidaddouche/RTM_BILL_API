@@ -56,5 +56,6 @@ id_bill = jsonData.get("data")["list"][0]["PK_VENTES"]
 
 last_bill = last_bill.format(id_bill, userId, token)
 
+print(last_bill)
 
 
