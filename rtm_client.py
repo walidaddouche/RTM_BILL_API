@@ -1,20 +1,9 @@
 import os
 import requests
 
+from dotenv import load_dotenv
+
 __all__ = ['RtmClient']
-
-
-def load_env_variables():
-    with open(".ENV") as f:
-        for line in f:
-            if line[0] != '#' and '=' in line:
-                key, value = line.split('=', 1)
-                key = key.strip()
-                value = value.strip()
-                os.environ[key] = value
-
-
-# Chargez les variables d'environnement à partir du fichier .env
 
 
 class RtmClient:
@@ -25,9 +14,11 @@ class RtmClient:
         self.code_client = None
         self.user_id = None
 
+        # Chargez les variables d'environnement à partir du fichier .env
+        load_dotenv(".ENV")
+
         # Get email and password from environment variables
 
-        load_env_variables()
         self.EMAIL_USER = os.environ.get('EMAIL_RTM')
         self.PASSWORD_USER = os.environ.get('PASSWORD_RTM')
 
@@ -35,6 +26,8 @@ class RtmClient:
         self.api_url = "https://api.rtm.fr"
         self.req_url = f"{self.api_url}/MaRtm/checkUser"
         self.bills_list_url = f"{self.api_url}/MaRtm/getListeVentes"
+
+        self.isLog = False
 
         # HTTP headers
         self.headers_list = {
@@ -63,47 +56,41 @@ class RtmClient:
         self.token = user_data["data"]["token"]
         self.code_client = user_data["data"]["user"]["code_dmz"]
 
+        self.isLog = True
+
         return True
 
+    def is_connected(self):
+        return self.isLog
+
     def get_all_bills(self):
-        bill_list_data = {
-            "userId": self.user_id,
-            "token": self.token,
-            "codeClient": self.code_client,
-            "limit": "12",  # size of bills list
-            "page": "1"
-        }
+        if not self.is_connected():
+            raise Exception("Error: not connected")
+        else:
 
-        # Send request to get bills of  user
-        list_vente_response = requests.request("POST", url=self.bills_list_url, data=bill_list_data,
-                                               headers=self.headers_list)
+            bill_list_data = {
+                "userId": self.user_id,
+                "token": self.token,
+                "codeClient": self.code_client,
+                "limit": "12",  # size of bills list
+                "page": "1"
+            }
 
-        # Get data from response
-        list_vente_data = list_vente_response.json()
+            # Send request to get bills of  user
+            list_vente_response = requests.request("POST", url=self.bills_list_url, data=bill_list_data,
+                                                   headers=self.headers_list)
 
-        # parse the Json response
+            # Get data from response
+            list_vente_data = list_vente_response.json()
 
-        return list_vente_data["data"]["list"]
+            # parse the Json response
+
+            return list_vente_data["data"]["list"]
 
     def get_bill_By_Id(self, id_bill):
-        bill_url = f"https://api.rtm.fr/MaRtm/printPDF/attestations?ids={id_bill}" \
-                   f"&userId={self.user_id}&token={self.token}"
-        return bill_url
-
-
-if __name__ == "__main__":
-    rtm_client = RtmClient()
-    # Connect to RTM API
-    if rtm_client.login():
-        # Get list of bills
-        bills = rtm_client.get_all_bills()
-        if len(bills) > 0:
-            for bill in bills:
-                bill_id = bill["PK_VENTES"]
-                url = rtm_client.get_bill_By_Id(bill_id)
-                print("The URL for bill with ID {} is: {}".format(bill_id, url))
+        if not self.is_connected():
+            raise Exception("Error: not connected")
         else:
-            print("The bill list is empty.")
-
-else:
-    print("Error: Login failed")
+            bill_url = f"https://api.rtm.fr/MaRtm/printPDF/attestations?ids={id_bill}" \
+                       f"&userId={self.user_id}&token={self.token}"
+            return bill_url
