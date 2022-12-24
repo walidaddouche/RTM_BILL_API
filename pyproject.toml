@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rtm"  # Nom de votre bibliothèque
-version = "1.1.0"  # Numéro de version de votre bibliothèque
+version = "1.1.1"  # Numéro de version de votre bibliothèque
 description = "Une bibliothèque Python pour accéder à l'API de RTM et recuperer ses factures"  # Description de votre bibliothèque
 authors = [""]  # Auteur(s) de la bibliothèque
 license = "MIT"  # Licence de votre bibliothèque
