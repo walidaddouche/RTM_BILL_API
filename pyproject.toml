@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "rtm"  # Nom de votre bibliothèque
+version = "1.0.0"  # Numéro de version de votre bibliothèque
+description = "Une bibliothèque Python pour accéder à l'API de RTM et recuperer ses factures"  # Description de votre bibliothèque
+authors = [""]  # Auteur(s) de la bibliothèque
+license = "MIT"  # Licence de votre bibliothèque
+
+[tool.poetry.dependencies]
+python = "^3.6"  # Version minimale de Python requise
+requests = "^2.24"  # Dépendance sur la bibliothèque requests
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1"  # Dépendance de développement sur la bibliothèque pytest

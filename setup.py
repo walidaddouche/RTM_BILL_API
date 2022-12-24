@@ -9,5 +9,5 @@ setup(
     url='https://github.com/walidaddouche/RTM_BILL_MAILER',  # URL du référentiel sur GitHub
     license='MIT',  # Licence sous laquelle votre librairie est publiée
     description='A RTM client library',  # Description de votre librairie
-    install_requires=['requests', "dotenv"],  # Liste des dépendances de votre librairie
+    install_requires=['requests'],  # Liste des dépendances de votre librairie
 )
