@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='rtm_client',  # Nom de votre librairie
-    version='0.1',  # Numéro de version de votre librairie
+    version='1.1',  # Numéro de version de votre librairie
     py_modules=['rtm_client'],  # Liste des modules à inclure dans la librairie
     author='Walid',  # Nom de l'auteur de la librairie
     author_email='##',  # Adresse email de l'auteur
