@@ -11,3 +11,4 @@ setup(
     description='A RTM Bill API',  # Description de votre librairie
     install_requires=['requests'],  # Liste des dépendances de votre librairie
 )
+# 06/12/2023
